@@ -1,0 +1,17 @@
+Source: kodi-game-libretro-blastem
+Priority: extra
+Maintainer: wsnipex <wsnipex@a1.net>
+Build-Depends: debhelper (>= 9.0.0),
+               cmake,
+               kodi-addon-dev,
+               libretro-blastem (>= 0.6.3) | blastem (>= 0.6.3)
+Standards-Version: 3.9.8
+Section: libs
+
+Package: kodi-game-libretro-blastem
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, kodi, kodi-game-libretro
+Enhances: kodi
+Description: Sega - Mega Drive - Genesis (BlastEm) core for kodi's retroplayer
+ Sega - Mega Drive - Genesis (BlastEm) core for kodi's retroplayer

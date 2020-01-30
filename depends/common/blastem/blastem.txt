@@ -1,0 +1,1 @@
+blastem https://github.com/libretro/blastem/archive/4206da1f986ecda199c82d4a2404eff904397f55.zip
