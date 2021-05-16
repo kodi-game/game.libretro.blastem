@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon id="game.libretro.blastem"
 		name="Sega - Mega Drive - Genesis (BlastEm)"
-		version="0.6.3.2"
-		provider-name="Libretro">
+		version="0.6.3.3"
+		provider-name="Mike Pavone">
 	<requires>
 		<import addon="game.libretro" version="1.0.0"/>
 	</requires>
