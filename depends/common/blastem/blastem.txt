@@ -1,1 +1,1 @@
-blastem https://github.com/libretro/blastem/archive/50b6210dd08d1015276f668b347d6b75df60902c.zip
+blastem https://github.com/libretro/blastem/archive/a01198f78a5eb4a31dfb798768f95850d9e1916f.tar.gz
