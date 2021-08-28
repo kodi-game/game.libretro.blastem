@@ -17,6 +17,12 @@
 		<license>GPLv3</license>
 		<platform>@PLATFORM@</platform>
 		<source>https://github.com/kodi-game/game.libretro.blastem</source>
+		<assets>
+			<icon>resources/icon.png</icon>
+			<screenshot>resources/screenshot-01.jpg</screenshot>
+			<screenshot>resources/screenshot-02.jpg</screenshot>
+			<screenshot>resources/screenshot-03.jpg</screenshot>
+		</assets>
 		<summary lang="en_GB">Sega - Mega Drive - Genesis (BlastEm) 0.6.3-pre</summary>
 		<description lang="en_GB">BlastEm is an open source, higly accurate emulator for the Genesis/Megadrive that runs on modest hardware.</description>
 	</extension>
