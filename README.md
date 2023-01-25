@@ -13,7 +13,7 @@ GPLv3
 
 ### Icon
 
-![Icon](game.libretro.blastem/resources/icon.png)
+![Sega - Mega Drive - Genesis (BlastEm) icon](game.libretro.blastem/resources/icon.png)
 
 ### Fanart
 
@@ -21,6 +21,6 @@ Help make me fanart!
 
 ### Screenshots
 
-![Screenshot](game.libretro.blastem/resources/screenshot-01.jpg)
-![Screenshot](game.libretro.blastem/resources/screenshot-02.jpg)
-![Screenshot](game.libretro.blastem/resources/screenshot-03.jpg)
+![Sega - Mega Drive - Genesis (BlastEm) screenshot](game.libretro.blastem/resources/screenshot-01.jpg)
+![Sega - Mega Drive - Genesis (BlastEm) screenshot](game.libretro.blastem/resources/screenshot-02.jpg)
+![Sega - Mega Drive - Genesis (BlastEm) screenshot](game.libretro.blastem/resources/screenshot-03.jpg)
