@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 msgctxt "Addon Summary"
-msgid "Sega - Mega Drive - Genesis (BlastEm) 0.6.3-pre"
+msgid "Sega - Mega Drive - Genesis (BlastEm)"
 msgstr ""
 
 msgctxt "Addon Description"
