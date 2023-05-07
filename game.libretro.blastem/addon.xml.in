@@ -24,6 +24,7 @@
 			<screenshot>resources/screenshot-02.jpg</screenshot>
 			<screenshot>resources/screenshot-03.jpg</screenshot>
 		</assets>
+		<summary lang="da_DK">Sega - Mega Drive - Genesis (BlastEm)</summary>
 		<summary lang="en_GB">Sega - Mega Drive - Genesis (BlastEm)</summary>
 		<summary lang="es_ES">Sega - Mega Drive - Genesis (BlastEm)</summary>
 		<description lang="da_DK">BlastEm er en åben kildekode, meget nøjagtig emulator til Genesis/Megadrive, der kører på beskeden hardware.</description>
