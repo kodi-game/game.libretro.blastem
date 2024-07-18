@@ -22,16 +22,40 @@ if(CORE_SYSTEM_NAME STREQUAL windows)
   else()
     set(MSYSTEM MINGW32)
   endif()
-  set(BUILD_COMMAND ${MINGW_MAKE} -j$ENV{NUMBER_OF_PROCESSORS} -C . -f Makefile.libretro platform=win MSYSTEM=${MSYSTEM} NOGL=1 ${LIBRETRO_DEBUG} GIT_VERSION=)
+  set(BUILD_COMMAND ${MINGW_MAKE}
+                    -j$ENV{NUMBER_OF_PROCESSORS}
+                    -C .
+                    -f Makefile.libretro
+                    ${LIBRETRO_DEBUG}
+                    GIT_VERSION=
+                    MSYSTEM=${MSYSTEM}
+                    platform=win
+                    NOGL=1)
 elseif(CORE_SYSTEM_NAME STREQUAL linux)
-  set(BUILD_COMMAND $(MAKE) -C . -f Makefile.libretro NOGL=1 platform=unix ${LIBRETRO_DEBUG} GIT_VERSION=)
+  set(BUILD_COMMAND $(MAKE)
+                    -C .
+                    -f Makefile.libretro
+                    ${LIBRETRO_DEBUG}
+                    GIT_VERSION=
+                    platform=unix
+                    NOGL=1)
 elseif(CORE_SYSTEM_NAME STREQUAL osx)
   if(CPU STREQUAL arm64)
     set(ARCH arm)
   else()
     set(ARCH intel)
   endif()
-  set(BUILD_COMMAND $(MAKE) -C . -f Makefile.libretro NOGL=1 platform=osx arch=${ARCH} ${LIBRETRO_DEBUG} GIT_VERSION=)
+  set(BUILD_COMMAND $(MAKE)
+                    -C .
+                    -f Makefile.libretro
+                    ${LIBRETRO_DEBUG}
+                    arch=${ARCH}
+                    CROSS_COMPILE=1
+                    GIT_VERSION=
+                    LIBRETRO_APPLE_ISYSROOT=${CMAKE_OSX_SYSROOT}
+                    LIBRETRO_APPLE_PLATFORM=${CPU}-apple-macos
+                    platform=osx
+                    NOGL=1)
 elseif(CORE_SYSTEM_NAME STREQUAL ios OR CORE_SYSTEM_NAME STREQUAL darwin_embedded)
   if(CORE_PLATFORM_NAME STREQUAL ios)
     set(LIBRETRO_SONAME blastem_libretro_ios${CMAKE_SHARED_LIBRARY_SUFFIX})
@@ -40,10 +64,22 @@ elseif(CORE_SYSTEM_NAME STREQUAL ios OR CORE_SYSTEM_NAME STREQUAL darwin_embedde
     else()
       set(PLATFORM ios)
     endif()
-    set(BUILD_COMMAND IOSSDK=${CMAKE_OSX_SYSROOT} $(MAKE) -C . -f Makefile.libretro NOGL=1 platform=${PLATFORM} ${LIBRETRO_DEBUG} GIT_VERSION=)
+    set(BUILD_COMMAND IOSSDK=${CMAKE_OSX_SYSROOT} $(MAKE)
+                                                  -C .
+                                                  -f Makefile.libretro
+                                                  ${LIBRETRO_DEBUG}
+                                                  GIT_VERSION=
+                                                  platform=${PLATFORM}
+                                                  NOGL=1)
   elseif(CORE_PLATFORM_NAME STREQUAL tvos)
     set(LIBRETRO_SONAME blastem_libretro_tvos${CMAKE_SHARED_LIBRARY_SUFFIX})
-    set(BUILD_COMMAND IOSSDK=${CMAKE_OSX_SYSROOT} $(MAKE) -C . -f Makefile.libretro NOGL=1 platform=tvos-arm64 ${LIBRETRO_DEBUG} GIT_VERSION=)
+    set(BUILD_COMMAND IOSSDK=${CMAKE_OSX_SYSROOT} $(MAKE)
+                                                  -C .
+                                                  -f Makefile.libretro
+                                                  ${LIBRETRO_DEBUG}
+                                                  GIT_VERSION=
+                                                  platform=tvos-arm64
+                                                  NOGL=1)
   endif()
 elseif(CORE_SYSTEM_NAME STREQUAL android)
   if(NOT NDKROOT)
@@ -56,13 +92,27 @@ elseif(CORE_SYSTEM_NAME STREQUAL android)
   else()
     message(FATAL_ERROR "${PROJECT_NAME} needs Android ${CPU} build command in CMakeLists.txt!")
   endif()
-  set(BUILD_COMMAND GNUMAKE=$(MAKE) ${NDKROOT}/ndk-build -C android/jni APP_ABI=${PLATFORM} V7NEONOPTIMIZATION=1 GIT_VERSION=
-                                    NDK_LIBS_OUT=${PROJECT_SOURCE_DIR}/${LIBRETRO_BINARY_DIR} NOGL=1 ${LIBRETRO_DEBUG} V=1
+  set(BUILD_COMMAND GNUMAKE=$(MAKE) ${NDKROOT}/ndk-build
+                                    -C android/jni
+                                    ${LIBRETRO_DEBUG}
+                                    APP_ABI=${PLATFORM}
+                                    APP_SHORT_COMMANDS=true
+                                    GIT_VERSION=
+                                    NDK_LIBS_OUT=${PROJECT_SOURCE_DIR}/${LIBRETRO_BINARY_DIR}
+                                    V=1
+                                    V7NEONOPTIMIZATION=1
+                                    NOGL=1
                     && cp ${PROJECT_SOURCE_DIR}/${LIBRETRO_BINARY_DIR}/${PLATFORM}/${LIBRETRO_JNISONAME} ${PROJECT_SOURCE_DIR}/${LIBRETRO_BINARY_DIR}/${LIBRETRO_SONAME})
 elseif(CORE_SYSTEM_NAME STREQUAL rbpi)
   message(FATAL_ERROR "${PROJECT_NAME} needs RPi build command in CMakeLists.txt!")
 elseif(CORE_SYSTEM_NAME STREQUAL freebsd)
-  set(BUILD_COMMAND $(MAKE) -C . -f Makefile.libretro NOGL=1 platform=unix ${LIBRETRO_DEBUG} GIT_VERSION=)
+  set(BUILD_COMMAND $(MAKE)
+                    -C .
+                    -f Makefile.libretro
+                    ${LIBRETRO_DEBUG
+                    GIT_VERSION=
+                    platform=unix
+                    NOGL=1)
 else()
   message(FATAL_ERROR "${PROJECT_NAME} - Unknown system: ${CORE_SYSTEM_NAME}")
 endif()
