@@ -29,6 +29,7 @@
 		<summary lang="es_ES">Sega - Mega Drive - Genesis (BlastEm)</summary>
 		<summary lang="it_IT">Sega - Mega Drive - Genesis (BlastEm)</summary>
 		<summary lang="ko_KR">세가 - 메가 드라이브 - 제네시스(BlastEm)</summary>
+		<summary lang="ru_RU">Sega - Mega Drive - Genesis (BlastEm)</summary>
 		<summary lang="sv_SE">Sega - Mega Drive - Genesis (BlastEm)</summary>
 		<summary lang="zh_CN">世嘉 - Mega Drive - Genesis (BlastEm)</summary>
 		<description lang="da_DK">BlastEm er en åben kildekode, meget nøjagtig emulator til Genesis/Megadrive, der kører på beskeden hardware.</description>
@@ -38,6 +39,7 @@
 		<description lang="fr_FR">BlastEm est un émulateur open source très précis pour Genesis/Megadrive qui fonctionne sur un matériel modeste.</description>
 		<description lang="it_IT">BlastEm è un emulatore open source altamente accurato per Genesis/Megadrive che gira su hardware modesto.</description>
 		<description lang="ko_KR">BlastEm은 평범한 하드웨어에서 실행되는 Genesis/Megadrive를 위한 매우 정확한 오픈 소스 에뮬레이터입니다.</description>
+		<description lang="ru_RU">BlastEm — эмулятор для Genesis/Megadrive с открытым исходным кодом , работающий даже на слабом &quot;железе&quot;.</description>
 		<description lang="sv_SE">BlastEm är en emulator med öppen källkod och hög noggrannhet för Genesis/Megadrive som körs på blygsam hårdvara.</description>
 		<description lang="zh_CN">BlastEm 是一款开源、高精度的模拟器，适用于在普通硬件上运行 Genesis/Megadrive。</description>
 	</extension>
