@@ -24,3 +24,8 @@ msgstr ""
 msgctxt "Addon Description"
 msgid "BlastEm is an open source, higly accurate emulator for the Genesis/Megadrive that runs on modest hardware."
 msgstr ""
+
+# Empty string with ID 30000
+msgctxt "#30001"
+msgid "System type"
+msgstr ""

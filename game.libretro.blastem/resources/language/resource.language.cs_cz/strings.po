@@ -24,3 +24,8 @@ msgstr "Sega - Mega Drive - Genesis (BlastEm)"
 msgctxt "Addon Description"
 msgid "BlastEm is an open source, higly accurate emulator for the Genesis/Megadrive that runs on modest hardware."
 msgstr "BlastEm je velmi přesný emulátor Genesis/Mega Drive s otevřeným zdrojovým kódem, který běží i na skromném hardwaru."
+
+# Empty string with ID 30000
+msgctxt "#30001"
+msgid "System type"
+msgstr ""
