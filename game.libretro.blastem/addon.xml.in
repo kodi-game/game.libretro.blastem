@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon id="game.libretro.blastem"
 		name="Sega - Mega Drive - Genesis (BlastEm)"
-		version="0.6.3.37"
+		version="0.6.3.38"
 		provider-name="Mike Pavone">
 	<requires>
 		<import addon="game.libretro" version="1.0.0"/>
@@ -10,8 +10,8 @@
 	<extension point="kodi.gameclient"
 			library_@PLATFORM@="@LIBRARY_FILENAME@">
 		<platforms></platforms>
-		<extensions>md|gen|sms|bin|rom</extensions>
-		<supports_vfs>true</supports_vfs>
+		<extensions>md|gen|smd|32x|sms|gg|sg|sg1|sc|sc3|sf7|col|cue|toc|iso|vgm|vgz|flac|wav|bin|rom|gz</extensions>
+		<supports_vfs>false</supports_vfs>
 		<supports_standalone>false</supports_standalone>
 		<supports_disc_control>false</supports_disc_control>
 		<requires_opengl>false</requires_opengl>
