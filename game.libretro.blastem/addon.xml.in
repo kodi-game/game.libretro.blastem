@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon id="game.libretro.blastem"
-		name="Sega - Mega Drive - Genesis (BlastEm)"
-		version="0.6.3.38"
+		name="Sega - MS/GG/MD/CD/32X (BlastEm)"
+		version="0.6.3.39"
 		provider-name="Mike Pavone">
 	<requires>
 		<import addon="game.libretro" version="1.0.0"/>
@@ -10,7 +10,7 @@
 	<extension point="kodi.gameclient"
 			library_@PLATFORM@="@LIBRARY_FILENAME@">
 		<platforms></platforms>
-		<extensions>md|gen|smd|32x|sms|gg|sg|sg1|sc|sc3|sf7|col|cue|toc|iso|vgm|vgz|flac|wav|bin|rom|gz</extensions>
+		<extensions>md|gen|smd|32x|sms|gg|sg|sg1|sc|sc3|sf7|col|cue|toc|iso|chd|vgm|vgz|flac|wav|bin|rom|gz</extensions>
 		<supports_vfs>false</supports_vfs>
 		<supports_standalone>false</supports_standalone>
 		<supports_disc_control>false</supports_disc_control>
@@ -28,7 +28,7 @@
 		</assets>
 		<summary lang="cs_CZ">Sega - Mega Drive - Genesis (BlastEm)</summary>
 		<summary lang="da_DK">Sega - Mega Drive - Genesis (BlastEm)</summary>
-		<summary lang="en_GB">Sega - Mega Drive - Genesis (BlastEm)</summary>
+		<summary lang="en_GB">Sega - MS/GG/MD/CD/32X (BlastEm)</summary>
 		<summary lang="es_ES">Sega - Mega Drive - Genesis (BlastEm)</summary>
 		<summary lang="ga">Sega - Mega Drive - Genesis (BlastEm)</summary>
 		<summary lang="it_IT">Sega - Mega Drive - Genesis (BlastEm)</summary>

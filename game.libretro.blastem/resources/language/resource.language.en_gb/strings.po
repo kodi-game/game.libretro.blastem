@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgctxt "Addon Summary"
-msgid "Sega - Mega Drive - Genesis (BlastEm)"
+msgid "Sega - MS/GG/MD/CD/32X (BlastEm)"
 msgstr ""
 
 msgctxt "Addon Description"
@@ -26,6 +26,86 @@ msgstr ""
 
 # Empty string with ID 30000
 
-msgctxt "#30001"
-msgid "System type"
+msgctxt "#30002"
+msgid "System Type"
+msgstr ""
+
+msgctxt "#30003"
+msgid "Mega Drive Model"
+msgstr ""
+
+msgctxt "#30004"
+msgid "Master System Model"
+msgstr ""
+
+msgctxt "#30005"
+msgid "Default Region"
+msgstr ""
+
+msgctxt "#30006"
+msgid "Force Default Region"
+msgstr ""
+
+msgctxt "#30007"
+msgid "Initial RAM Value"
+msgstr ""
+
+msgctxt "#30008"
+msgid "68000 Clock Divider"
+msgstr ""
+
+msgctxt "#30009"
+msgid "MegaWiFi"
+msgstr ""
+
+msgctxt "#30010"
+msgid "Port 1 Device"
+msgstr ""
+
+msgctxt "#30011"
+msgid "Port 2 Device"
+msgstr ""
+
+msgctxt "#30012"
+msgid "Overall Gain"
+msgstr ""
+
+msgctxt "#30013"
+msgid "FM Gain"
+msgstr ""
+
+msgctxt "#30014"
+msgid "PSG Gain"
+msgstr ""
+
+msgctxt "#30015"
+msgid "RF5C164 Gain"
+msgstr ""
+
+msgctxt "#30016"
+msgid "CD Audio Gain"
+msgstr ""
+
+msgctxt "#30017"
+msgid "FM DAC"
+msgstr ""
+
+msgctxt "#30018"
+msgid "Low Pass Filter Cutoff"
+msgstr ""
+
+msgctxt "#30019"
+msgid "Overscan Cropped, Top"
+msgstr ""
+
+msgctxt "#30020"
+msgid "Overscan Cropped, Bottom"
+msgstr ""
+
+msgctxt "#30021"
+msgid "Overscan Cropped, Left"
+msgstr ""
+
+msgctxt "#30022"
+msgid "Overscan Cropped, Right"
 msgstr ""

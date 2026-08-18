@@ -1,4 +1,4 @@
-# Sega - Mega Drive - Genesis (BlastEm)
+# Sega - MS/GG/MD/CD/32X (BlastEm)
 
 ### Description
 
@@ -10,7 +10,7 @@ GPLv3
 
 ### Icon
 
-![Sega - Mega Drive - Genesis (BlastEm) icon](game.libretro.blastem/resources/icon.png)
+![Sega - MS/GG/MD/CD/32X (BlastEm) icon](game.libretro.blastem/resources/icon.png)
 
 ### Fanart
 
@@ -18,6 +18,6 @@ Help make me fanart!
 
 ### Screenshots
 
-![Sega - Mega Drive - Genesis (BlastEm) screenshot](game.libretro.blastem/resources/screenshot-01.jpg)
-![Sega - Mega Drive - Genesis (BlastEm) screenshot](game.libretro.blastem/resources/screenshot-02.jpg)
-![Sega - Mega Drive - Genesis (BlastEm) screenshot](game.libretro.blastem/resources/screenshot-03.jpg)
+![Sega - MS/GG/MD/CD/32X (BlastEm) screenshot](game.libretro.blastem/resources/screenshot-01.jpg)
+![Sega - MS/GG/MD/CD/32X (BlastEm) screenshot](game.libretro.blastem/resources/screenshot-02.jpg)
+![Sega - MS/GG/MD/CD/32X (BlastEm) screenshot](game.libretro.blastem/resources/screenshot-03.jpg)

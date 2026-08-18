@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <settings>
 	<category label="128">
-		<setting label="30001" type="select" id="blastem_system_type" values="auto|gen|sms|gg|sg1000|sc3000|32x|32xcd|pico|copera|laseractive|mediaplayer" default="auto"/>
+		<setting label="30002" type="select" id="blastem_system_type" values="auto|gen|sms|gg|sg1000|sc3000|32x|32xcd|pico|copera|laseractive|mediaplayer" default="auto"/>
+		<setting label="30003" type="select" id="blastem_model" values="md1va3|md1va0|md1va6|md2va1|md2va2|md3va1|md3va2|teradrive" default="md1va3"/>
+		<setting label="30004" type="select" id="blastem_sms_model" values="sms2|md1va0|md1va3|md1va6|md2va1|md2va2|md3va1|md3va2|sms1|teradrive" default="sms2"/>
+		<setting label="30005" type="select" id="blastem_region" values="U|J|E" default="U"/>
+		<setting label="30006" type="select" id="blastem_force_region" values="off|on" default="off"/>
+		<setting label="30007" type="select" id="blastem_ram_init" values="zero|random" default="zero"/>
+		<setting label="30008" type="select" id="blastem_m68k_divider" values="7|6|5|4|3|2|1|8|10|14" default="7"/>
+		<setting label="30009" type="select" id="blastem_megawifi" values="off|on" default="off"/>
+		<setting label="30010" type="select" id="blastem_io_1" values="gamepad6.1|gamepad3.1|none" default="gamepad6.1"/>
+		<setting label="30011" type="select" id="blastem_io_2" values="gamepad6.2|gamepad3.2|none" default="gamepad6.2"/>
+		<setting label="30012" type="select" id="blastem_gain" values="0.0|6.0|4.5|3.0|1.5|0.0|-1.5|-3.0|-4.5|-6.0|-9.5|-12.0|-18.0|-24.0" default="0.0"/>
+		<setting label="30013" type="select" id="blastem_fm_gain" values="0.0|6.0|4.5|3.0|1.5|0.0|-1.5|-3.0|-4.5|-6.0|-9.5|-12.0|-18.0|-24.0" default="0.0"/>
+		<setting label="30014" type="select" id="blastem_psg_gain" values="0.0|6.0|4.5|3.0|1.5|0.0|-1.5|-3.0|-4.5|-6.0|-9.5|-12.0|-18.0|-24.0" default="0.0"/>
+		<setting label="30015" type="select" id="blastem_rf5c164_gain" values="-6.0|6.0|4.5|3.0|1.5|0.0|-1.5|-3.0|-4.5|-6.0|-9.5|-12.0|-18.0|-24.0" default="-6.0"/>
+		<setting label="30016" type="select" id="blastem_cdda_gain" values="-9.5|6.0|4.5|3.0|1.5|0.0|-1.5|-3.0|-4.5|-6.0|-9.5|-12.0|-18.0|-24.0" default="-9.5"/>
+		<setting label="30017" type="select" id="blastem_fm_dac" values="auto|zero_offset|linear" default="auto"/>
+		<setting label="30018" type="select" id="blastem_lowpass_cutoff" values="3390|2000|2500|3000|4000|5000|8000|24000" default="3390"/>
+		<setting label="30019" type="select" id="blastem_overscan_top" values="auto|0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32" default="auto"/>
+		<setting label="30020" type="select" id="blastem_overscan_bottom" values="auto|0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32" default="auto"/>
+		<setting label="30021" type="select" id="blastem_overscan_left" values="auto|0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32" default="auto"/>
+		<setting label="30022" type="select" id="blastem_overscan_right" values="auto|0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32" default="auto"/>
 	</category>
 </settings>

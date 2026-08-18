@@ -13,5 +13,5 @@ Section: libs
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, kodi, kodi-game-libretro
 Enhances: kodi
-Description: Sega - Mega Drive - Genesis (BlastEm) core for kodi's retroplayer
- Sega - Mega Drive - Genesis (BlastEm) core for kodi's retroplayer
+Description: Sega - MS/GG/MD/CD/32X (BlastEm) core for kodi's retroplayer
+ Sega - MS/GG/MD/CD/32X (BlastEm) core for kodi's retroplayer
