@@ -18,7 +18,7 @@ msgstr ""
 "X-Generator: Weblate 5.9.2\n"
 
 msgctxt "Addon Summary"
-msgid "Sega - Mega Drive - Genesis (BlastEm)"
+msgid "Sega - MS/GG/MD/CD/32X (BlastEm)"
 msgstr "世嘉 - Mega Drive - Genesis (BlastEm)"
 
 msgctxt "Addon Description"
