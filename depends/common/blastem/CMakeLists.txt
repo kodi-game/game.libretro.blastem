@@ -130,7 +130,7 @@ elseif(CORE_SYSTEM_NAME STREQUAL android)
     message(FATAL_ERROR "${PROJECT_NAME} needs Android ${CPU} build command in CMakeLists.txt!")
   endif()
   set(BUILD_COMMAND GNUMAKE=$(MAKE) ${NDKROOT}/ndk-build
-                                    -C android/jni
+                                    -C android/app/jni
                                     ${build_job_count}
                                     ${LIBRETRO_DEBUG}
                                     APP_ABI=${PLATFORM}
