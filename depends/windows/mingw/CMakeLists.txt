@@ -1,13 +1,14 @@
 cmake_minimum_required(VERSION 3.5)
 project(mingw)
 
-foreach(repo msys mingw32 mingw64)
-  if(${repo} STREQUAL msys)
-    file(WRITE ${CMAKE_CURRENT_SOURCE_DIR}/etc/pacman.d/mirrorlist.${repo} "Server = http://mirrors.kodi.tv/build-deps/win32/msys2/repos/${repo}2/$arch\n")
-  else()
-    file(WRITE ${CMAKE_CURRENT_SOURCE_DIR}/etc/pacman.d/mirrorlist.${repo} "Server = http://mirrors.kodi.tv/build-deps/win32/msys2/repos/${repo}\n")
-  endif()
-endforeach()
+# TODO
+#foreach(repo msys mingw32 mingw64)
+#  if(${repo} STREQUAL msys)
+#    file(WRITE ${CMAKE_CURRENT_SOURCE_DIR}/etc/pacman.d/mirrorlist.${repo} "Server = http://mirrors.kodi.tv/build-deps/win32/msys2/repos/${repo}2/$arch\n")
+#  else()
+#    file(WRITE ${CMAKE_CURRENT_SOURCE_DIR}/etc/pacman.d/mirrorlist.${repo} "Server = http://mirrors.kodi.tv/build-deps/win32/msys2/repos/${repo}\n")
+#  endif()
+#endforeach()
 
 include(CheckSymbolExists)
 check_symbol_exists(_X86_ "Windows.h" _X86_)
@@ -28,7 +29,7 @@ else()
 endif()
 
 execute_process(COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/usr/bin/bash.exe --login -c "pacman-key --init" ERROR_QUIET)
-execute_process(COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/usr/bin/bash.exe --login -c "pacman --noconfirm -S make ${HOST}-gcc nasm")
+execute_process(COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/usr/bin/bash.exe --login -c "pacman --noconfirm -S make ${HOST}-gcc nasm python")
 
 file(GLOB_RECURSE shared_libs ${CMAKE_CURRENT_SOURCE_DIR}/${MINGW_PATH}/*.dll.a)
 file(REMOVE ${shared_libs})
