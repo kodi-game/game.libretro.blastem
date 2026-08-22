@@ -109,3 +109,515 @@ msgstr ""
 msgctxt "#30022"
 msgid "Overscan Cropped, Right"
 msgstr ""
+
+msgctxt "#30023"
+msgid "System"
+msgstr ""
+
+msgctxt "#30024"
+msgid "Which machine is emulated, how it is clocked and where it thinks it is."
+msgstr ""
+
+msgctxt "#30025"
+msgid "Which machine to emulate. Auto works out the system from the media, which is right for everything except a LaserActive disc and some Pico and Copera titles."
+msgstr ""
+
+msgctxt "#30026"
+msgid "Auto"
+msgstr ""
+
+msgctxt "#30027"
+msgid "gen"
+msgstr ""
+
+msgctxt "#30028"
+msgid "sms"
+msgstr ""
+
+msgctxt "#30029"
+msgid "gg"
+msgstr ""
+
+msgctxt "#30030"
+msgid "sg1000"
+msgstr ""
+
+msgctxt "#30031"
+msgid "sc3000"
+msgstr ""
+
+msgctxt "#30032"
+msgid "32x"
+msgstr ""
+
+msgctxt "#30033"
+msgid "32xcd"
+msgstr ""
+
+msgctxt "#30034"
+msgid "pico"
+msgstr ""
+
+msgctxt "#30035"
+msgid "copera"
+msgstr ""
+
+msgctxt "#30036"
+msgid "laseractive"
+msgstr ""
+
+msgctxt "#30037"
+msgid "mediaplayer"
+msgstr ""
+
+msgctxt "#30038"
+msgid "Which revision of the console to emulate. Models from the Mega Drive 2 on have TMSS, which needs a TMSS ROM named tmss.md in the system directory."
+msgstr ""
+
+msgctxt "#30039"
+msgid "Gen/MD 1 VA3"
+msgstr ""
+
+msgctxt "#30040"
+msgid "Gen/MD 1 VA0"
+msgstr ""
+
+msgctxt "#30041"
+msgid "Gen/MD 1 VA6"
+msgstr ""
+
+msgctxt "#30042"
+msgid "Gen/MD 2 VA1"
+msgstr ""
+
+msgctxt "#30043"
+msgid "Gen/MD 2 VA2"
+msgstr ""
+
+msgctxt "#30044"
+msgid "Genesis 3 VA1"
+msgstr ""
+
+msgctxt "#30045"
+msgid "Genesis 3 VA2"
+msgstr ""
+
+msgctxt "#30046"
+msgid "Teradrive"
+msgstr ""
+
+msgctxt "#30047"
+msgid "Which machine to run Master System software on. The Mega Drive models run it the way a Mega Drive with a Power Base Converter does."
+msgstr ""
+
+msgctxt "#30048"
+msgid "SMS 2"
+msgstr ""
+
+msgctxt "#30049"
+msgid "SMS 1"
+msgstr ""
+
+msgctxt "#30050"
+msgid "Region to use when the software does not say which it wants, or says it will take more than one."
+msgstr ""
+
+msgctxt "#30051"
+msgid "U - Americas"
+msgstr ""
+
+msgctxt "#30052"
+msgid "J - Japan"
+msgstr ""
+
+msgctxt "#30053"
+msgid "E - Europe"
+msgstr ""
+
+msgctxt "#30054"
+msgid "Use the region above even for software that asks for a different one."
+msgstr ""
+
+msgctxt "#30055"
+msgid "Off"
+msgstr ""
+
+msgctxt "#30056"
+msgid "On"
+msgstr ""
+
+msgctxt "#30057"
+msgid "What work RAM holds at power on. Random exposes software that relies on uninitialized memory."
+msgstr ""
+
+msgctxt "#30058"
+msgid "Zero"
+msgstr ""
+
+msgctxt "#30059"
+msgid "Random"
+msgstr ""
+
+msgctxt "#30060"
+msgid "Divider between the master clock and the 68000. Anything below 7 overclocks the CPU, which some software will not survive."
+msgstr ""
+
+msgctxt "#30061"
+msgid "7 (7.67 MHz, native)"
+msgstr ""
+
+msgctxt "#30062"
+msgid "6 (8.9 MHz)"
+msgstr ""
+
+msgctxt "#30063"
+msgid "5 (10.7 MHz)"
+msgstr ""
+
+msgctxt "#30064"
+msgid "4 (13.4 MHz)"
+msgstr ""
+
+msgctxt "#30065"
+msgid "3 (17.9 MHz)"
+msgstr ""
+
+msgctxt "#30066"
+msgid "2 (26.8 MHz)"
+msgstr ""
+
+msgctxt "#30067"
+msgid "1 (53.7 MHz)"
+msgstr ""
+
+msgctxt "#30068"
+msgid "8 (6.7 MHz)"
+msgstr ""
+
+msgctxt "#30069"
+msgid "10 (5.4 MHz)"
+msgstr ""
+
+msgctxt "#30070"
+msgid "14 (3.8 MHz)"
+msgstr ""
+
+msgctxt "#30071"
+msgid "Emulate the MegaWiFi cartridge hardware, which lets software make its own connections to the internet. Only turn this on for software you trust."
+msgstr ""
+
+msgctxt "#30072"
+msgid "Video"
+msgstr ""
+
+msgctxt "#30073"
+msgid "How much of the picture the core hands to the frontend."
+msgstr ""
+
+msgctxt "#30074"
+msgid "Lines cropped off the top of the picture. Auto follows the frontend's own crop overscan setting."
+msgstr ""
+
+msgctxt "#30075"
+msgid "0"
+msgstr ""
+
+msgctxt "#30076"
+msgid "1"
+msgstr ""
+
+msgctxt "#30077"
+msgid "2"
+msgstr ""
+
+msgctxt "#30078"
+msgid "3"
+msgstr ""
+
+msgctxt "#30079"
+msgid "4"
+msgstr ""
+
+msgctxt "#30080"
+msgid "5"
+msgstr ""
+
+msgctxt "#30081"
+msgid "6"
+msgstr ""
+
+msgctxt "#30082"
+msgid "7"
+msgstr ""
+
+msgctxt "#30083"
+msgid "8"
+msgstr ""
+
+msgctxt "#30084"
+msgid "9"
+msgstr ""
+
+msgctxt "#30085"
+msgid "10"
+msgstr ""
+
+msgctxt "#30086"
+msgid "11"
+msgstr ""
+
+msgctxt "#30087"
+msgid "12"
+msgstr ""
+
+msgctxt "#30088"
+msgid "13"
+msgstr ""
+
+msgctxt "#30089"
+msgid "14"
+msgstr ""
+
+msgctxt "#30090"
+msgid "15"
+msgstr ""
+
+msgctxt "#30091"
+msgid "16"
+msgstr ""
+
+msgctxt "#30092"
+msgid "17"
+msgstr ""
+
+msgctxt "#30093"
+msgid "18"
+msgstr ""
+
+msgctxt "#30094"
+msgid "19"
+msgstr ""
+
+msgctxt "#30095"
+msgid "20"
+msgstr ""
+
+msgctxt "#30096"
+msgid "21"
+msgstr ""
+
+msgctxt "#30097"
+msgid "22"
+msgstr ""
+
+msgctxt "#30098"
+msgid "23"
+msgstr ""
+
+msgctxt "#30099"
+msgid "24"
+msgstr ""
+
+msgctxt "#30100"
+msgid "25"
+msgstr ""
+
+msgctxt "#30101"
+msgid "26"
+msgstr ""
+
+msgctxt "#30102"
+msgid "27"
+msgstr ""
+
+msgctxt "#30103"
+msgid "28"
+msgstr ""
+
+msgctxt "#30104"
+msgid "29"
+msgstr ""
+
+msgctxt "#30105"
+msgid "30"
+msgstr ""
+
+msgctxt "#30106"
+msgid "31"
+msgstr ""
+
+msgctxt "#30107"
+msgid "32"
+msgstr ""
+
+msgctxt "#30108"
+msgid "Lines cropped off the bottom of the picture. Auto follows the frontend's own crop overscan setting."
+msgstr ""
+
+msgctxt "#30109"
+msgid "Columns cropped off the left of the picture. Auto follows the frontend's own crop overscan setting."
+msgstr ""
+
+msgctxt "#30110"
+msgid "Columns cropped off the right of the picture. Auto follows the frontend's own crop overscan setting."
+msgstr ""
+
+msgctxt "#30111"
+msgid "Audio"
+msgstr ""
+
+msgctxt "#30112"
+msgid "Mixing and filtering of the emulated sound chips."
+msgstr ""
+
+msgctxt "#30113"
+msgid "Gain applied to the mix of every sound chip."
+msgstr ""
+
+msgctxt "#30114"
+msgid "0 dB"
+msgstr ""
+
+msgctxt "#30115"
+msgid "+6 dB"
+msgstr ""
+
+msgctxt "#30116"
+msgid "+4.5 dB"
+msgstr ""
+
+msgctxt "#30117"
+msgid "+3 dB"
+msgstr ""
+
+msgctxt "#30118"
+msgid "+1.5 dB"
+msgstr ""
+
+msgctxt "#30119"
+msgid "-1.5 dB"
+msgstr ""
+
+msgctxt "#30120"
+msgid "-3 dB"
+msgstr ""
+
+msgctxt "#30121"
+msgid "-4.5 dB"
+msgstr ""
+
+msgctxt "#30122"
+msgid "-6 dB"
+msgstr ""
+
+msgctxt "#30123"
+msgid "-9.5 dB"
+msgstr ""
+
+msgctxt "#30124"
+msgid "-12 dB"
+msgstr ""
+
+msgctxt "#30125"
+msgid "-18 dB"
+msgstr ""
+
+msgctxt "#30126"
+msgid "-24 dB"
+msgstr ""
+
+msgctxt "#30127"
+msgid "Gain applied to the YM2612 / YM3438."
+msgstr ""
+
+msgctxt "#30128"
+msgid "Gain applied to the SN76489 PSG."
+msgstr ""
+
+msgctxt "#30129"
+msgid "Gain applied to the Sega CD's PCM chip."
+msgstr ""
+
+msgctxt "#30130"
+msgid "Gain applied to CD audio tracks."
+msgstr ""
+
+msgctxt "#30131"
+msgid "Which DAC behaviour to emulate. The discrete YM2612's zero offset is the source of the ladder effect, the integrated YM3438 in later models does not have it."
+msgstr ""
+
+msgctxt "#30132"
+msgid "Default for model"
+msgstr ""
+
+msgctxt "#30133"
+msgid "Zero offset (discrete YM2612)"
+msgstr ""
+
+msgctxt "#30134"
+msgid "Linear (integrated YM3438)"
+msgstr ""
+
+msgctxt "#30135"
+msgid "Cutoff of the low pass filter the console's audio circuit applies. Higher values leave more high end in."
+msgstr ""
+
+msgctxt "#30136"
+msgid "3390 Hz (Model 1)"
+msgstr ""
+
+msgctxt "#30137"
+msgid "2000 Hz"
+msgstr ""
+
+msgctxt "#30138"
+msgid "2500 Hz"
+msgstr ""
+
+msgctxt "#30139"
+msgid "3000 Hz"
+msgstr ""
+
+msgctxt "#30140"
+msgid "4000 Hz"
+msgstr ""
+
+msgctxt "#30141"
+msgid "5000 Hz"
+msgstr ""
+
+msgctxt "#30142"
+msgid "8000 Hz"
+msgstr ""
+
+msgctxt "#30143"
+msgid "24000 Hz (off)"
+msgstr ""
+
+msgctxt "#30144"
+msgid "Input"
+msgstr ""
+
+msgctxt "#30145"
+msgid "What is plugged into the console's controller ports."
+msgstr ""
+
+msgctxt "#30146"
+msgid "What is plugged into the first controller port."
+msgstr ""
+
+msgctxt "#30147"
+msgid "6-button pad"
+msgstr ""
+
+msgctxt "#30148"
+msgid "3-button pad"
+msgstr ""
+
+msgctxt "#30149"
+msgid "None"
+msgstr ""
+
+msgctxt "#30150"
+msgid "What is plugged into the second controller port."
+msgstr ""
