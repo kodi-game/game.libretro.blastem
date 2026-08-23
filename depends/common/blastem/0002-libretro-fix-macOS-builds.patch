@@ -1,0 +1,77 @@
+From 1ab6374fbbf3eaf56fff80cf33497f74dd33241e Mon Sep 17 00:00:00 2001
+From: Garrett Brown <themagnificentmrb@gmail.com>
+Date: Sat, 22 Aug 2026 19:02:49 -0700
+Subject: [PATCH 2/2] libretro: fix macOS builds
+
+---
+ Makefile.libretro | 10 ++++++++++
+ gen_x86.c         | 21 ++++++++++++++++++++-
+ 2 files changed, 30 insertions(+), 1 deletion(-)
+
+diff --git a/Makefile.libretro b/Makefile.libretro
+index 453ea98..295bfac 100644
+--- a/Makefile.libretro
++++ b/Makefile.libretro
+@@ -27,7 +27,17 @@ else ifneq ($(findstring Darwin,$(UNAME)),)
+ 	platform = osx
+ 	OS :=Darwin
+ 	CC ?=gcc
++ifeq ($(origin ABI),undefined)
++ifeq ($(arch),arm)
++	ABI := aarch64
++else ifeq ($(arch),intel)
++	ABI := x86_64
++else ifneq (,$(filter arm64 aarch64,$(UNAMEM)))
++	ABI := aarch64
++else
+ 	ABI := x86_64
++endif
++endif
+ 	target = libblastem.dylib
+ 	libname = blastem_libretro.dylib
+ else ifneq ($(findstring Haiku,$(UNAME)),)
+diff --git a/gen_x86.c b/gen_x86.c
+index 553d3dc..eaf3fa2 100644
+--- a/gen_x86.c
++++ b/gen_x86.c
+@@ -12,6 +12,19 @@
+ #include <stdarg.h>
+ #include <string.h>
+ 
++#if !defined(_MSC_VER) || defined(__llvm__)
++#if defined(__GNUC__) && !defined(__clang__) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 8))
++#define BLASTEM_HAS_CPU_BUILTINS
++#elif defined(__has_builtin)
++#if __has_builtin(__builtin_cpu_init) && __has_builtin(__builtin_cpu_supports)
++#define BLASTEM_HAS_CPU_BUILTINS
++#endif
++#endif
++#ifndef BLASTEM_HAS_CPU_BUILTINS
++#include <cpuid.h>
++#endif
++#endif
++
+ #define REX_RM_FIELD 0x1
+ #define REX_SIB_FIELD 0x2
+ #define REX_REG_FIELD 0x4
+@@ -2671,10 +2684,16 @@ static void cpu_feature_detect(void)
+ 		has_sse2 = !!(info[3] & (1 << 26));
+ 		has_popcnt = !!(info[2] & (1 << 23));
+ 	}
+-#else
++#elif defined(BLASTEM_HAS_CPU_BUILTINS)
+ 	__builtin_cpu_init();
+ 	has_sse2 = __builtin_cpu_supports("sse2");
+ 	has_popcnt = __builtin_cpu_supports("popcnt");
++#else
++	unsigned int eax, ebx, ecx, edx;
++	if (__get_cpuid(1, &eax, &ebx, &ecx, &edx)) {
++		has_sse2 = !!(edx & (1U << 26));
++		has_popcnt = !!(ecx & (1U << 23));
++	}
+ #endif
+ }
+ 
+-- 
+2.43.0
+
