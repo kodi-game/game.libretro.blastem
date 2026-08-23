@@ -1,13 +1,33 @@
-From 1ab6374fbbf3eaf56fff80cf33497f74dd33241e Mon Sep 17 00:00:00 2001
+From e3ee553864c2d6723caecdbb669793db87857e22 Mon Sep 17 00:00:00 2001
 From: Garrett Brown <themagnificentmrb@gmail.com>
 Date: Sat, 22 Aug 2026 19:02:49 -0700
 Subject: [PATCH 2/2] libretro: fix macOS builds
 
 ---
+ Makefile          |  8 ++++++++
  Makefile.libretro | 10 ++++++++++
  gen_x86.c         | 21 ++++++++++++++++++++-
- 2 files changed, 30 insertions(+), 1 deletion(-)
+ 3 files changed, 38 insertions(+), 1 deletion(-)
 
+diff --git a/Makefile b/Makefile
+index 014c414..846f31d 100644
+--- a/Makefile
++++ b/Makefile
+@@ -193,6 +193,14 @@ LIBOBJDIR:=$(OBJDIR)/lib
+ CFLAGS:=$(OPT) $(CFLAGS)
+ LDFLAGS:=$(OPT) $(LDFLAGS)
+ 
++ifeq ($(OS),Darwin)
++ifeq ($(CROSS_COMPILE),1)
++TARGET_RULE := -target $(LIBRETRO_APPLE_PLATFORM) -isysroot $(LIBRETRO_APPLE_ISYSROOT)
++CFLAGS += $(TARGET_RULE)
++LDFLAGS += $(TARGET_RULE)
++endif
++endif
++
+ ifdef Z80_LOG_ADDRESS
+ CFLAGS+= -DZ80_LOG_ADDRESS
+ endif
 diff --git a/Makefile.libretro b/Makefile.libretro
 index 453ea98..295bfac 100644
 --- a/Makefile.libretro
