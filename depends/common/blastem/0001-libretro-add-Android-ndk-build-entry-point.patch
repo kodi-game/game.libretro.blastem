@@ -1,0 +1,397 @@
+From 436a9a8b39c28bf94a5cd28a3de5dd6bab8fd124 Mon Sep 17 00:00:00 2001
+From: Garrett Brown <themagnificentmrb@gmail.com>
+Date: Sat, 22 Aug 2026 18:17:50 -0700
+Subject: [PATCH] libretro: add Android ndk-build entry point
+
+---
+ Makefile                       | 73 ++--------------------------------
+ Makefile.libretro.sources      | 70 ++++++++++++++++++++++++++++++++
+ android/app/build.gradle       |  2 +-
+ android/app/jni/Android.mk     |  6 +++
+ android/app/jni/Application.mk |  5 +++
+ android/jni/Android.mk         | 43 ++++++++++++++++++++
+ android/jni/Application.mk     |  2 +
+ paths.c                        | 10 ++---
+ system.c                       |  2 +-
+ util.c                         |  6 +--
+ 10 files changed, 140 insertions(+), 79 deletions(-)
+ create mode 100644 Makefile.libretro.sources
+ create mode 100644 android/jni/Android.mk
+ create mode 100644 android/jni/Application.mk
+
+diff --git a/Makefile b/Makefile
+index 03dfa1b..014c414 100644
+--- a/Makefile
++++ b/Makefile
+@@ -12,16 +12,6 @@ SDL_UPPER:=$(shell echo $(SDL) | tr '[a-z]' '[A-Z]')
+ FIXUP:=true
+ Z80_DISPATCH:=goto
+ 
+-BUNDLED_LIBZ:=zlib/adler32.o zlib/compress.o zlib/crc32.o zlib/deflate.o zlib/gzclose.o zlib/gzlib.o zlib/gzread.o\
+-	zlib/gzwrite.o zlib/infback.o zlib/inffast.o zlib/inflate.o zlib/inftrees.o zlib/trees.o zlib/uncompr.o zlib/zutil.o
+-
+-#CHD support. libchdr is vendored unmodified; its zstd codec is satisfied by a
+-#stub (see libchdr/zstd.h) rather than by vendoring a compression library for the
+-#one codec chdman does not use by default.
+-BUNDLED_LIBCHDR:=libchdr/libchdr_bitstream.o libchdr/libchdr_cdrom.o libchdr/libchdr_chd.o \
+-	libchdr/libchdr_flac.o libchdr/libchdr_huffman.o libchdr/zstd_stub.o lzma/LzmaDec.o
+-CHD_CFLAGS:=-Ilibchdr/include -Ilibchdr -Ilzma -Izlib
+-
+ UTIL_LDFLAGS:=
+ ifeq ($(OS),Windows)
+ 
+@@ -249,9 +239,6 @@ NEW_CORE:=1
+ endif
+ endif
+ 
+-TRANSOBJS=gen.o backend.o $(MEM) arena.o tern.o
+-M68KOBJS=68kinst.o disasm.o
+-
+ ifdef NO_FILE_CHOOSER
+ CHOOSER:=nuklear_ui/filechooser_nulll.o
+ endif
+@@ -260,62 +247,7 @@ endif
+ #core, but the two are independent. NEW_Z80 can be set on its own to pair the
+ #JIT 68K with the generated Z80, which is useful for narrowing down which core
+ #a timing difference comes from.
+-ifdef NEW_CORE
+-NEW_Z80:=1
+-M68KOBJS+= m68k.o
+-CFLAGS+= -DNEW_CORE
+-else
+-ifeq ($(CPU),x86_64)
+-M68KOBJS+= m68k_core.o m68k_core_x86.o
+-TRANSOBJS+= gen_x86.o backend_x86.o
+-else
+-ifeq ($(CPU),i686)
+-M68KOBJS+= m68k_core.o m68k_core_x86.o
+-TRANSOBJS+= gen_x86.o backend_x86.o
+-endif
+-endif
+-endif
+-
+-ifdef NEW_Z80
+-Z80OBJS=z80.o z80inst.o
+-CFLAGS+= -DNEW_Z80
+-else
+-Z80OBJS=z80inst.o z80_to_x86.o
+-endif
+-AUDIOOBJS=ym2612.o ymf262.o ym_common.o psg.o wave.o flac.o vgm.o event_log.o render_audio.o rf5c164.o
+-CONFIGOBJS=config.o tern.o util.o paths.o
+-NUKLEAROBJS=$(FONT) $(CHOOSER) nuklear_ui/blastem_nuklear.o nuklear_ui/sfnt.o nuklear_ui/debug_ui.o
+-RENDEROBJS=ppm.o controller_info.o
+-ifdef USE_FBDEV
+-RENDEROBJS+= render_fbdev.o
+-else
+-RENDEROBJS+= render_sdl.o
+-endif
+-
+-ifdef NOZLIB
+-CFLAGS+= -DDISABLE_ZLIB
+-else
+-RENDEROBJS+= $(LIBZOBJS) png.o
+-endif
+-
+-COREOBJS:=system.o genesis.o vdp.o io.o romdb.o hash.o xband.o realtec.o i2c.o nor.o $(M68KOBJS) \
+-	sega_mapper.o multi_game.o megawifi.o $(NET) serialize.o $(TERMINAL) $(CONFIGOBJS) gst.o \
+-	$(TRANSOBJS) $(AUDIOOBJS) saves.o jcart.o gen_player.o coleco.o pico_pcm.o ymz263b.o \
+-	segacd.o lc8951.o cdimage.o chdimage.o $(BUNDLED_LIBCHDR) cdd_mcu.o cd_graphics.o cdd_fader.o sft_mapper.o mediaplayer.o \
+-	laseractive.o upd78k2_dis.o upd78k2.o osd_font.o pd0178.o radica.o 32x.o 32x_video.o sh2.o \
+-	sh2_decode.o sh7095.o
+-
+-ifdef NOZ80
+-CFLAGS+=-DNO_Z80
+-else
+-COREOBJS+= sms.o i8255.o korean_sms_multi.o $(Z80OBJS)
+-endif
+-
+-MAINOBJS:=$(COREOBJS) blastem.o $(RENDEROBJS) zip.o  menu.o debug.o gdb_remote.o bindings.o oscilloscope.o
+-
+-#vfs_file.o only in this list: it is the libretro build's file layer, and the
+-#standalone one keeps using stdio directly (see media_file.h).
+-LIBOBJS:=$(COREOBJS) libblastem.o lib_stubs.o rom.db.o systems.cfg.o vfs_file.o $(LIBZOBJS)
++include Makefile.libretro.sources
+ 
+ ifdef NONUKLEAR
+ CFLAGS+= -DDISABLE_NUKLEAR
+@@ -463,6 +395,9 @@ sh2dis$(EXE) : $(SH2DISOBJS:%.o=$(OBJDIR)/%.o)
+ %.cfg.c : %.cfg
+ 	sed -e 's/"/\\"/g' -e 's/^\(.*\)$$/"\1\\n"/' -e'1s/^\(.*\)$$/const char $(shell echo $< | tr '.' '_')_data[] = \1/' -e '$$s/^\(.*\)$$/\1;/' $< > $@
+ 
++.PHONY: libretro-generated-sources
++libretro-generated-sources: m68k.c z80.c upd78k2.c sh2.c rom.db.c systems.cfg.c
++
+ $(OBJDIR)/%.o : %.S | $(ORDERONLY)
+ 	$(CC) -c -MMD -o $@ $<
+ 
+diff --git a/Makefile.libretro.sources b/Makefile.libretro.sources
+new file mode 100644
+index 0000000..1fa3fad
+--- /dev/null
++++ b/Makefile.libretro.sources
+@@ -0,0 +1,70 @@
++BUNDLED_LIBZ:=zlib/adler32.o zlib/compress.o zlib/crc32.o zlib/deflate.o zlib/gzclose.o zlib/gzlib.o zlib/gzread.o\
++	zlib/gzwrite.o zlib/infback.o zlib/inffast.o zlib/inflate.o zlib/inftrees.o zlib/trees.o zlib/uncompr.o zlib/zutil.o
++
++#CHD support. libchdr is vendored unmodified; its zstd codec is satisfied by a
++#stub (see libchdr/zstd.h) rather than by vendoring a compression library for the
++#one codec chdman does not use by default.
++BUNDLED_LIBCHDR:=libchdr/libchdr_bitstream.o libchdr/libchdr_cdrom.o libchdr/libchdr_chd.o \
++	libchdr/libchdr_flac.o libchdr/libchdr_huffman.o libchdr/zstd_stub.o lzma/LzmaDec.o
++CHD_CFLAGS:=-Ilibchdr/include -Ilibchdr -Ilzma -Izlib
++LIBZOBJS?=$(BUNDLED_LIBZ)
++
++TRANSOBJS=gen.o backend.o $(MEM) arena.o tern.o
++M68KOBJS=68kinst.o disasm.o
++
++ifdef NEW_CORE
++NEW_Z80:=1
++M68KOBJS+= m68k.o
++CFLAGS+= -DNEW_CORE
++else
++ifeq ($(CPU),x86_64)
++M68KOBJS+= m68k_core.o m68k_core_x86.o
++TRANSOBJS+= gen_x86.o backend_x86.o
++else
++ifeq ($(CPU),i686)
++M68KOBJS+= m68k_core.o m68k_core_x86.o
++TRANSOBJS+= gen_x86.o backend_x86.o
++endif
++endif
++endif
++
++ifdef NEW_Z80
++Z80OBJS=z80.o z80inst.o
++CFLAGS+= -DNEW_Z80
++else
++Z80OBJS=z80inst.o z80_to_x86.o
++endif
++AUDIOOBJS=ym2612.o ymf262.o ym_common.o psg.o wave.o flac.o vgm.o event_log.o render_audio.o rf5c164.o
++CONFIGOBJS=config.o tern.o util.o paths.o
++NUKLEAROBJS=$(FONT) $(CHOOSER) nuklear_ui/blastem_nuklear.o nuklear_ui/sfnt.o nuklear_ui/debug_ui.o
++RENDEROBJS=ppm.o controller_info.o
++ifdef USE_FBDEV
++RENDEROBJS+= render_fbdev.o
++else
++RENDEROBJS+= render_sdl.o
++endif
++
++ifdef NOZLIB
++CFLAGS+= -DDISABLE_ZLIB
++else
++RENDEROBJS+= $(LIBZOBJS) png.o
++endif
++
++COREOBJS:=system.o genesis.o vdp.o io.o romdb.o hash.o xband.o realtec.o i2c.o nor.o $(M68KOBJS) \
++	sega_mapper.o multi_game.o megawifi.o $(NET) serialize.o $(TERMINAL) $(CONFIGOBJS) gst.o \
++	$(TRANSOBJS) $(AUDIOOBJS) saves.o jcart.o gen_player.o coleco.o pico_pcm.o ymz263b.o \
++	segacd.o lc8951.o cdimage.o chdimage.o $(BUNDLED_LIBCHDR) cdd_mcu.o cd_graphics.o cdd_fader.o sft_mapper.o mediaplayer.o \
++	laseractive.o upd78k2_dis.o upd78k2.o osd_font.o pd0178.o radica.o 32x.o 32x_video.o sh2.o \
++	sh2_decode.o sh7095.o
++
++ifdef NOZ80
++CFLAGS+=-DNO_Z80
++else
++COREOBJS+= sms.o i8255.o korean_sms_multi.o $(Z80OBJS)
++endif
++
++MAINOBJS:=$(COREOBJS) blastem.o $(RENDEROBJS) zip.o  menu.o debug.o gdb_remote.o bindings.o oscilloscope.o
++
++#vfs_file.o only in this list: it is the libretro build's file layer, and the
++#standalone one keeps using stdio directly (see media_file.h).
++LIBOBJS:=$(COREOBJS) libblastem.o lib_stubs.o rom.db.o systems.cfg.o vfs_file.o $(LIBZOBJS)
+diff --git a/android/app/build.gradle b/android/app/build.gradle
+index f0ce2eb..7c20e46 100644
+--- a/android/app/build.gradle
++++ b/android/app/build.gradle
+@@ -19,7 +19,7 @@ android {
+         versionName "1.0"
+         externalNativeBuild {
+             ndkBuild {
+-                arguments "APP_PLATFORM=android-19"
++                arguments "APP_PLATFORM=android-19", "BLASTEM_STANDALONE=1"
+                 abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+             }
+             // cmake {
+diff --git a/android/app/jni/Android.mk b/android/app/jni/Android.mk
+index 5053e7d..207dddb 100644
+--- a/android/app/jni/Android.mk
++++ b/android/app/jni/Android.mk
+@@ -1 +1,7 @@
++# Gradle opts into the standalone SDL application. Direct ndk-build consumers
++# use the libretro entry point, including callers of this newer app/jni path.
++ifeq ($(BLASTEM_STANDALONE),1)
+ include $(call all-subdir-makefiles)
++else
++include $(call my-dir)/../../jni/Android.mk
++endif
+diff --git a/android/app/jni/Application.mk b/android/app/jni/Application.mk
+index 12bad51..6934ea1 100644
+--- a/android/app/jni/Application.mk
++++ b/android/app/jni/Application.mk
+@@ -4,7 +4,12 @@
+ # https://developer.android.com/ndk/guides/cpp-support
+ # APP_STL := c++_shared
+ 
++ifeq ($(BLASTEM_STANDALONE),1)
++# Keep every ABI supported by the standalone Gradle application.
+ APP_ABI := armeabi-v7a arm64-v8a x86 x86_64
++else
++APP_ABI := armeabi-v7a arm64-v8a x86
++endif
+ 
+ # Min runtime API level
+ APP_PLATFORM=android-19
+diff --git a/android/jni/Android.mk b/android/jni/Android.mk
+new file mode 100644
+index 0000000..d0065d6
+--- /dev/null
++++ b/android/jni/Android.mk
+@@ -0,0 +1,43 @@
++LOCAL_PATH := $(call my-dir)
++BLASTEM_ROOT := $(LOCAL_PATH)/../..
++
++# This is the stable ndk-build entry point for the libretro core. Its object
++# graph is shared with Makefile.libretro through the root makefile fragment.
++MEM := mem.o
++TERMINAL := terminal.o
++NET := net.o
++
++ifeq ($(TARGET_ARCH_ABI),x86)
++CPU := i686
++CFLAGS := -DX86_32
++else ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
++CPU := armv7
++NEW_CORE := 1
++else ifeq ($(TARGET_ARCH_ABI),arm64-v8a)
++CPU := aarch64
++NEW_CORE := 1
++else
++$(error Unsupported BlastEm libretro Android ABI: $(TARGET_ARCH_ABI))
++endif
++
++ifdef NOGL
++CFLAGS += -DDISABLE_OPENGL
++endif
++
++include $(BLASTEM_ROOT)/Makefile.libretro.sources
++
++ifneq ($(filter clean,$(MAKECMDGOALS)),clean)
++BLASTEM_MAKE := $(if $(GNUMAKE),$(GNUMAKE),$(MAKE))
++BLASTEM_GENERATE_RESULT := $(shell $(BLASTEM_MAKE) --no-print-directory -C $(BLASTEM_ROOT) libretro-generated-sources >/dev/null && echo ok || echo failed)
++ifneq ($(BLASTEM_GENERATE_RESULT),ok)
++$(error Failed to generate BlastEm libretro sources)
++endif
++endif
++
++include $(CLEAR_VARS)
++LOCAL_MODULE := retro
++LOCAL_SRC_FILES := $(addprefix ../../,$(sort $(LIBOBJS:.o=.c)))
++LOCAL_C_INCLUDES := $(addprefix $(BLASTEM_ROOT)/,$(patsubst -I%,%,$(CHD_CFLAGS)))
++LOCAL_CFLAGS := -std=gnu99 -DIS_LIB -DDISABLE_NUKLEAR -DHAVE_UNISTD_H $(CFLAGS)
++LOCAL_LDLIBS := -lm
++include $(BUILD_SHARED_LIBRARY)
+diff --git a/android/jni/Application.mk b/android/jni/Application.mk
+new file mode 100644
+index 0000000..c9538cf
+--- /dev/null
++++ b/android/jni/Application.mk
+@@ -0,0 +1,2 @@
++APP_ABI := armeabi-v7a arm64-v8a x86
++APP_PLATFORM := android-19
+diff --git a/paths.c b/paths.c
+index 98730c8..693c39e 100644
+--- a/paths.c
++++ b/paths.c
+@@ -13,7 +13,7 @@
+ #include <unistd.h>
+ #include <errno.h>
+ #endif
+-#ifdef __ANDROID__
++#if defined(__ANDROID__) && !defined(IS_LIB)
+ #include <SDL_system.h>
+ #include <jni.h>
+ #endif
+@@ -45,7 +45,7 @@ static void persist_path(void)
+ 	free(pathfname);
+ }
+ 
+-#ifdef __ANDROID__
++#if defined(__ANDROID__) && !defined(IS_LIB)
+ static char *get_external_storage_path()
+ {
+ 	static char *ret;
+@@ -82,7 +82,7 @@ cleanup:
+ uint8_t get_initial_browse_path(char **dst)
+ {
+ 	char *base = NULL;
+-#ifdef __ANDROID__
++#if defined(__ANDROID__) && !defined(IS_LIB)
+ 	static const char activity_class_name[] = "com/retrodev/blastem/BlastEmActivity";
+ 	static const char get_rom_path_name[] = "getRomPath";
+ 	JNIEnv *env = SDL_AndroidGetJNIEnv();
+@@ -143,7 +143,7 @@ uint8_t get_initial_browse_path(char **dst)
+ 	}
+ #endif
+ 	if (!base){
+-#ifdef __ANDROID__
++#if defined(__ANDROID__) && !defined(IS_LIB)
+ 		
+ 		base = get_external_storage_path();
+ #else
+@@ -486,7 +486,7 @@ fallback:
+ 	return exe_dir;
+ }
+ 
+-#ifdef __ANDROID__
++#if defined(__ANDROID__) && !defined(IS_LIB)
+ #include <SDL.h>
+ 
+ char const *get_config_dir()
+diff --git a/system.c b/system.c
+index e39ee6b..6e52861 100644
+--- a/system.c
++++ b/system.c
+@@ -563,7 +563,7 @@ end:
+ 
+ #ifndef DISABLE_ZLIB
+ 
+-#ifdef __ANDROID__
++#if defined(__ANDROID__) && !defined(IS_LIB)
+ gzFile gzopen_wrapper(const char *path, const char *mode)
+ {
+ 	if (startswith(path, "content://")) {
+diff --git a/util.c b/util.c
+index 2cba3fa..d8ba757 100644
+--- a/util.c
++++ b/util.c
+@@ -8,7 +8,7 @@
+ #include <sys/stat.h>
+ #include <errno.h>
+ 
+-#ifdef __ANDROID__
++#if defined(__ANDROID__) && !defined(IS_LIB)
+ #include <android/log.h>
+ #include <SDL_system.h>
+ #include <jni.h>
+@@ -901,7 +901,7 @@ char *fgets_timeout(char *dst, size_t size, FILE *f, uint64_t timeout_usec, void
+ 
+ #include <dirent.h>
+ 
+-#ifdef __ANDROID__
++#if defined(__ANDROID__) && !defined(IS_LIB)
+ static dir_entry *jdir_list_helper(JNIEnv *env, jmethodID meth, char *path, size_t *numret)
+ {
+ 	jstring jpath = (*env)->NewStringUTF(env, path);
+@@ -940,7 +940,7 @@ static dir_entry *jdir_list_helper(JNIEnv *env, jmethodID meth, char *path, size
+ 
+ dir_entry *get_dir_list(char *path, size_t *numret)
+ {
+-#ifdef __ANDROID__
++#if defined(__ANDROID__) && !defined(IS_LIB)
+ 	debug_message("get_dir_list(%s)\n", path);
+ 	if (startswith(path, "content://")) {
+ 		static const char activity_class_name[] = "com/retrodev/blastem/BlastEmActivity";
+-- 
+2.43.0
+
