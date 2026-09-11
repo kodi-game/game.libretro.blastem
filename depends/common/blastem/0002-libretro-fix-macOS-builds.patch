@@ -1,16 +1,16 @@
-From e3ee553864c2d6723caecdbb669793db87857e22 Mon Sep 17 00:00:00 2001
+From 4d0f1b0b7979f1ac655c123cdc628138c87093b8 Mon Sep 17 00:00:00 2001
 From: Garrett Brown <themagnificentmrb@gmail.com>
 Date: Sat, 22 Aug 2026 19:02:49 -0700
 Subject: [PATCH 2/2] libretro: fix macOS builds
 
 ---
  Makefile          |  8 ++++++++
- Makefile.libretro | 10 ++++++++++
+ Makefile.libretro | 11 +++++++++++
  gen_x86.c         | 21 ++++++++++++++++++++-
- 3 files changed, 38 insertions(+), 1 deletion(-)
+ 3 files changed, 39 insertions(+), 1 deletion(-)
 
 diff --git a/Makefile b/Makefile
-index 014c414..846f31d 100644
+index 077b36a..43a784d 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -193,6 +193,14 @@ LIBOBJDIR:=$(OBJDIR)/lib
@@ -29,13 +29,14 @@ index 014c414..846f31d 100644
  CFLAGS+= -DZ80_LOG_ADDRESS
  endif
 diff --git a/Makefile.libretro b/Makefile.libretro
-index 453ea98..295bfac 100644
+index dd6bac7..dcd9023 100644
 --- a/Makefile.libretro
 +++ b/Makefile.libretro
-@@ -27,7 +27,17 @@ else ifneq ($(findstring Darwin,$(UNAME)),)
- 	platform = osx
- 	OS :=Darwin
- 	CC ?=gcc
+@@ -63,6 +63,17 @@ else ifneq (,$(filter arm64 aarch64,$(UNAMEM)))
+ 	ABI := aarch64
+ else
+ 	ABI := x86_64
++endif
 +ifeq ($(origin ABI),undefined)
 +ifeq ($(arch),arm)
 +	ABI := aarch64
@@ -44,12 +45,11 @@ index 453ea98..295bfac 100644
 +else ifneq (,$(filter arm64 aarch64,$(UNAMEM)))
 +	ABI := aarch64
 +else
- 	ABI := x86_64
++	ABI := x86_64
 +endif
-+endif
+ endif
  	target = libblastem.dylib
  	libname = blastem_libretro.dylib
- else ifneq ($(findstring Haiku,$(UNAME)),)
 diff --git a/gen_x86.c b/gen_x86.c
 index 553d3dc..eaf3fa2 100644
 --- a/gen_x86.c
@@ -93,5 +93,5 @@ index 553d3dc..eaf3fa2 100644
  }
  
 -- 
-2.43.0
+2.47.1.windows.1
 

@@ -1,4 +1,4 @@
-From 436a9a8b39c28bf94a5cd28a3de5dd6bab8fd124 Mon Sep 17 00:00:00 2001
+From 26b88e7b3ae89372b50abf84c3d5d4ac8be40670 Mon Sep 17 00:00:00 2001
 From: Garrett Brown <themagnificentmrb@gmail.com>
 Date: Sat, 22 Aug 2026 18:17:50 -0700
 Subject: [PATCH 1/2] libretro: add Android ndk-build entry point
@@ -11,16 +11,13 @@ Subject: [PATCH 1/2] libretro: add Android ndk-build entry point
  android/app/jni/Application.mk |  5 +++
  android/jni/Android.mk         | 43 ++++++++++++++++++++
  android/jni/Application.mk     |  2 +
- paths.c                        | 10 ++---
- system.c                       |  2 +-
- util.c                         |  6 +--
- 10 files changed, 140 insertions(+), 79 deletions(-)
+ 7 files changed, 131 insertions(+), 70 deletions(-)
  create mode 100644 Makefile.libretro.sources
  create mode 100644 android/jni/Android.mk
  create mode 100644 android/jni/Application.mk
 
 diff --git a/Makefile b/Makefile
-index 03dfa1b..014c414 100644
+index 79dc445..077b36a 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -12,16 +12,6 @@ SDL_UPPER:=$(shell echo $(SDL) | tr '[a-z]' '[A-Z]')
@@ -114,7 +111,7 @@ index 03dfa1b..014c414 100644
  
  ifdef NONUKLEAR
  CFLAGS+= -DDISABLE_NUKLEAR
-@@ -463,6 +395,9 @@ sh2dis$(EXE) : $(SH2DISOBJS:%.o=$(OBJDIR)/%.o)
+@@ -472,6 +404,9 @@ PYTHON ?= python3
  %.cfg.c : %.cfg
  	sed -e 's/"/\\"/g' -e 's/^\(.*\)$$/"\1\\n"/' -e'1s/^\(.*\)$$/const char $(shell echo $< | tr '.' '_')_data[] = \1/' -e '$$s/^\(.*\)$$/\1;/' $< > $@
  
@@ -299,99 +296,6 @@ index 0000000..c9538cf
 @@ -0,0 +1,2 @@
 +APP_ABI := armeabi-v7a arm64-v8a x86
 +APP_PLATFORM := android-19
-diff --git a/paths.c b/paths.c
-index 98730c8..693c39e 100644
---- a/paths.c
-+++ b/paths.c
-@@ -13,7 +13,7 @@
- #include <unistd.h>
- #include <errno.h>
- #endif
--#ifdef __ANDROID__
-+#if defined(__ANDROID__) && !defined(IS_LIB)
- #include <SDL_system.h>
- #include <jni.h>
- #endif
-@@ -45,7 +45,7 @@ static void persist_path(void)
- 	free(pathfname);
- }
- 
--#ifdef __ANDROID__
-+#if defined(__ANDROID__) && !defined(IS_LIB)
- static char *get_external_storage_path()
- {
- 	static char *ret;
-@@ -82,7 +82,7 @@ cleanup:
- uint8_t get_initial_browse_path(char **dst)
- {
- 	char *base = NULL;
--#ifdef __ANDROID__
-+#if defined(__ANDROID__) && !defined(IS_LIB)
- 	static const char activity_class_name[] = "com/retrodev/blastem/BlastEmActivity";
- 	static const char get_rom_path_name[] = "getRomPath";
- 	JNIEnv *env = SDL_AndroidGetJNIEnv();
-@@ -143,7 +143,7 @@ uint8_t get_initial_browse_path(char **dst)
- 	}
- #endif
- 	if (!base){
--#ifdef __ANDROID__
-+#if defined(__ANDROID__) && !defined(IS_LIB)
- 		
- 		base = get_external_storage_path();
- #else
-@@ -486,7 +486,7 @@ fallback:
- 	return exe_dir;
- }
- 
--#ifdef __ANDROID__
-+#if defined(__ANDROID__) && !defined(IS_LIB)
- #include <SDL.h>
- 
- char const *get_config_dir()
-diff --git a/system.c b/system.c
-index e39ee6b..6e52861 100644
---- a/system.c
-+++ b/system.c
-@@ -563,7 +563,7 @@ end:
- 
- #ifndef DISABLE_ZLIB
- 
--#ifdef __ANDROID__
-+#if defined(__ANDROID__) && !defined(IS_LIB)
- gzFile gzopen_wrapper(const char *path, const char *mode)
- {
- 	if (startswith(path, "content://")) {
-diff --git a/util.c b/util.c
-index 2cba3fa..d8ba757 100644
---- a/util.c
-+++ b/util.c
-@@ -8,7 +8,7 @@
- #include <sys/stat.h>
- #include <errno.h>
- 
--#ifdef __ANDROID__
-+#if defined(__ANDROID__) && !defined(IS_LIB)
- #include <android/log.h>
- #include <SDL_system.h>
- #include <jni.h>
-@@ -901,7 +901,7 @@ char *fgets_timeout(char *dst, size_t size, FILE *f, uint64_t timeout_usec, void
- 
- #include <dirent.h>
- 
--#ifdef __ANDROID__
-+#if defined(__ANDROID__) && !defined(IS_LIB)
- static dir_entry *jdir_list_helper(JNIEnv *env, jmethodID meth, char *path, size_t *numret)
- {
- 	jstring jpath = (*env)->NewStringUTF(env, path);
-@@ -940,7 +940,7 @@ static dir_entry *jdir_list_helper(JNIEnv *env, jmethodID meth, char *path, size
- 
- dir_entry *get_dir_list(char *path, size_t *numret)
- {
--#ifdef __ANDROID__
-+#if defined(__ANDROID__) && !defined(IS_LIB)
- 	debug_message("get_dir_list(%s)\n", path);
- 	if (startswith(path, "content://")) {
- 		static const char activity_class_name[] = "com/retrodev/blastem/BlastEmActivity";
 -- 
-2.43.0
+2.47.1.windows.1
 
