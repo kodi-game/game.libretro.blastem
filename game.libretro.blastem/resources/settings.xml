@@ -128,7 +128,7 @@
 		</category>
 		<category id="video" label="30072" help="30073">
 			<group id="1">
-				<setting id="blastem_overscan_top" type="string" label="30019" help="30074">
+				<setting id="blastem_overscan_top" type="string" label="30019" help="30151">
 					<level>0</level>
 					<default>auto</default>
 					<constraints>
@@ -171,7 +171,7 @@
 					</constraints>
 					<control type="list" format="string" />
 				</setting>
-				<setting id="blastem_overscan_bottom" type="string" label="30020" help="30108">
+				<setting id="blastem_overscan_bottom" type="string" label="30020" help="30152">
 					<level>0</level>
 					<default>auto</default>
 					<constraints>
@@ -214,7 +214,7 @@
 					</constraints>
 					<control type="list" format="string" />
 				</setting>
-				<setting id="blastem_overscan_left" type="string" label="30021" help="30109">
+				<setting id="blastem_overscan_left" type="string" label="30021" help="30153">
 					<level>0</level>
 					<default>auto</default>
 					<constraints>
@@ -257,7 +257,7 @@
 					</constraints>
 					<control type="list" format="string" />
 				</setting>
-				<setting id="blastem_overscan_right" type="string" label="30022" help="30110">
+				<setting id="blastem_overscan_right" type="string" label="30022" help="30154">
 					<level>0</level>
 					<default>auto</default>
 					<constraints>

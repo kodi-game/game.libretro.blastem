@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon id="game.libretro.blastem"
 		name="Sega - MS/GG/MD/CD/32X (BlastEm)"
-		version="0.6.3.40"
+		version="0.6.3.41"
 		provider-name="Mike Pavone">
 	<requires>
 		<import addon="game.libretro" version="1.0.0"/>
@@ -9,7 +9,7 @@
 	</requires>
 	<extension point="kodi.gameclient"
 			library_@PLATFORM@="@LIBRARY_FILENAME@">
-		<platforms></platforms>
+		<platforms>Sega - MS/GG/MD/CD/32X</platforms>
 		<extensions>md|gen|smd|32x|sms|gg|sg|sg1|sc|sc3|sf7|col|cue|toc|iso|chd|vgm|vgz|flac|wav|bin|rom|gz</extensions>
 		<supports_vfs>false</supports_vfs>
 		<supports_standalone>false</supports_standalone>
