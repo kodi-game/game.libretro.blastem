@@ -24,7 +24,7 @@
 					</constraints>
 					<control type="list" format="string" />
 				</setting>
-				<setting id="blastem_model" type="string" label="30003" help="30038">
+				<setting id="blastem_model" type="string" label="30003" help="30155">
 					<level>0</level>
 					<default>md1va3</default>
 					<constraints>

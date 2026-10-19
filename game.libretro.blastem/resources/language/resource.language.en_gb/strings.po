@@ -170,9 +170,9 @@ msgctxt "#30037"
 msgid "mediaplayer"
 msgstr ""
 
-msgctxt "#30038"
-msgid "Which revision of the console to emulate. Models from the Mega Drive 2 on have TMSS, which needs a TMSS ROM named tmss.md in the system directory."
-msgstr ""
+#~ msgctxt "#30038"
+#~ msgid "Which revision of the console to emulate. Models from the Mega Drive 2 on have TMSS, which needs a TMSS ROM named tmss.md in the system directory."
+#~ msgstr ""
 
 msgctxt "#30039"
 msgid "Gen/MD 1 VA3"
@@ -636,4 +636,8 @@ msgstr ""
 
 msgctxt "#30154"
 msgid "Columns cropped off the right of the picture. Auto crops the region's overscan area."
+msgstr ""
+
+msgctxt "#30155"
+msgid "Which revision of the console to emulate. Models from the Mega Drive 2 on have TMSS, which shows the licensed-by-Sega screen at boot and needs the TMSS ROM in the system directory, named tmss.md or bios_MD.bin."
 msgstr ""
